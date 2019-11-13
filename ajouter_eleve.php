@@ -36,9 +36,10 @@ function check_params($params) {
     $email = $_POST['email'];
     $tel = $_POST['tel'];
     $address = $_POST['address'];
+    $sex = $_POST['sex'];
 
     $connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname) or die("Can't connect to database");
-    $query = "INSERT INTO eleves VALUES(NULL,'".$lastname."','".$firstname."','".$dateNaiss."','".$date."')";
+    $query = "INSERT INTO eleves VALUES(NULL,'".$lastname."','".$firstname."','".$dateNaiss."','".$sex."','".$tel."','".$address."',NULL,'".$date."')";
     echo "<br>".$query."<br>";
     $result = mysqli_query($connect, $query);
     if (!$result) {
