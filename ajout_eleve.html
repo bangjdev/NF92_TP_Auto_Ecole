@@ -9,35 +9,64 @@
         <div class="container">
             <h1>Ajoutez un nouveau elève</h1>
             <form action="ajouter_eleve.php" method="POST">
-                <div class="form-group">
-                    <label>Prénom d'elève</label>
-                    <input class="form-control" type="text" name="firstname" placeholder="Entrez prénom">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Prénom d'elève</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" type="text" name="firstname" placeholder="Entrez prénom">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Nom d'elève</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" type="text" name="lastname" placeholder="Entrez nom">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label>Nom d'elève</label>
-                    <input class="form-control" type="text" name="lastname" placeholder="Entrez nom">
+                    <div class="row">
+                        <legend class="col-form-label col-sm-3 pt-0">Sexe</legend>
+                        <div class="col-sm-9">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sex" value="homme" checked>
+                                <label class="form-check-label">Homme</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sex" value="femme">
+                                <label class="form-check-label">Femme</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Date de naissance</label>
-                    <input class="form-control" type="date" name="dob">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Date de naissance</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" type="date" name="dob">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input class="form-control" type="email" name="email">
-                </div> 
-                <div class="form-group">
-                    <label>Tél</label>
-                    <input class="form-control" type="text" name="tel">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Email</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" type="email" name="email">
+                    </div>
                 </div>
-		<div class="form-group">
-		    <lable>Adresse postale</label>
-	    	    <input class="form-control" type="text" name="address">
-		</div>
-		<div class="form-group center-block">
-                    <input class="btn btn-primary" type="submit" value="Ajoutez">
-		    <input class="btn btn-danger" type="submit" value="Effacer">
-		</div>
-		</div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Téléphone</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" type="text" name="tel">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Adresse postale</label>
+                    <div class="col-sm-9">
+	    	            <input class="form-control" type="text" name="address">
+                    </div>
+                </div>
+
+		        <div class="form-group">
+                    <div class="col-sm-4 offset-sm-4 btn-group btn-group-justified">
+                        <input class="btn btn-primary" type="submit" value="Ajoutez">
+            		    <input class="btn btn-danger" type="reset" value="Effacez">
+                    </div>
+		        </div>
             </form> 
         </div>        
     </body>

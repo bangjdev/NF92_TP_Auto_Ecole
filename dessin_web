@@ -1,0 +1,27 @@
+Elève
+  - Nom
+  - Prénom
+  - Date de naissance
+  - Teléphone
+  - Adresse postale
+  - Date d'inscription
+  - Crédit de séance
+  - Sexe
+
+Séance
+  - Horaire
+  - Durée
+  - Nombre de places
+  - Lieu
+  - Thème
+
+Inscription
+  - Elève
+  - Séance
+  - Nombre de fautes
+  - Présence
+
+Thème
+  - Niveau de difficulté
+  - Nom
+  - Description
