@@ -1,9 +1,13 @@
 <?php
 // ================ GLOBAL VARIABLES =================
-//    error_reporting(E_ALL);
-//    ini_set('display_errors', 1); 
-    $required_params = array('name',
-                            'descriptif');
+    ini_set('display_startup_errors', 1);
+    ini_set('display_errors', 1);
+    error_reporting(-1);
+    date_default_timezone_set('Europe/Paris');
+
+    $required_params = array('menuChoixTheme',
+                            'DateSeance',
+                            'effmax');
 
 // ==================== FUNCTIONS ====================
 
@@ -25,23 +29,31 @@ function show_summary($params) {
 
 // ==================== MAIN ====================
     if (!check_params($_POST)) {
+        //      http_response_code(400);
         echo "Bad request<br>";
-	    return;
+        return;
     }
-    date_default_timezone_set('Europe/Paris');
     $dbhost = 'localhost';
     $dbuser = 'root';
     $dbpass = 'mypassword';
     $dbname = 'nf92a172';
-    $dbtable = 'themes';
-    $name = $_POST['name'];
-    $descriptif = $_POST['descriptif'];
-    $date = date("Y-m-d");
+    $dbtable = 'seances';
+    $theme = $_POST['menuChoixTheme'];
+    $dateseance = $_POST['DateSeance'];
+    $today = date("Y-m-d");
+    $effmax = $_POST['effmax'];
 
     show_summary($_POST);
 
+    if ($dateseance < $today) {
+        echo "Vous ne pouvez pas créer une séance au passé<br>";
+        return;
+    }
+
     $connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname) or die("Can't connect to database");
-    $query = "INSERT INTO ".$dbtable." (nom, descriptif) VALUES ('".$name."','".$descriptif."')";
+
+    $query = "INSERT INTO ".$dbtable." VALUES(NULL,'".$dateseance."','".$effmax."','".$theme."')";
+
     echo "<h1>Query</h1>".$query."<br>";
     $result = mysqli_query($connect, $query);
     if (!$result) {
@@ -49,3 +61,4 @@ function show_summary($params) {
     }
     mysqli_close($connect);
 ?>
+
