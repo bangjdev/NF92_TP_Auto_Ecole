@@ -1,4 +1,5 @@
 <?php
+    include('config.php');
 // ================ GLOBAL VARIABLES =================
     ini_set('display_startup_errors', 1);
     ini_set('display_errors', 1);
@@ -33,10 +34,6 @@ function show_summary($params) {
         echo "Bad request<br>";
         return;
     }
-    $dbhost = 'localhost';
-    $dbuser = 'root';
-    $dbpass = 'mypassword';
-    $dbname = 'nf92a172';
     $dbtable = 'seances';
     $theme = $_POST['menuChoixTheme'];
     $dateseance = $_POST['DateSeance'];
@@ -46,11 +43,23 @@ function show_summary($params) {
     show_summary($_POST);
 
     if ($dateseance < $today) {
-        echo "Vous ne pouvez pas créer une séance au passé<br>";
+        echo "Vous ne pouvez pas créer une séance au passé<br>";        
+        return;
+    }    
+
+    $connect = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME) or die("Can't connect to database");
+    mysqli_query($connect, "SET NAMES utf8");
+
+    // Check duplicate seance
+    $query = "SELECT * FROM ".$dbtable." WHERE DateSeance='".$dateseance."' and idtheme='".$theme."'";
+    $result = mysqli_query($connect, $query);
+    if (mysqli_num_rows($result)) {
+        echo "Vous ne pouvez pas avoir des séances avec le même thème et la même date";
+        mysqli_close($connect);
         return;
     }
 
-    $connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname) or die("Can't connect to database");
+    // Insert seance
 
     $query = "INSERT INTO ".$dbtable." VALUES(NULL,'".$dateseance."','".$effmax."','".$theme."')";
 

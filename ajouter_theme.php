@@ -1,4 +1,5 @@
 <?php
+    include('config.php');
 // ================ GLOBAL VARIABLES =================
 //    error_reporting(E_ALL);
 //    ini_set('display_errors', 1); 
@@ -29,20 +30,21 @@ function show_summary($params) {
 	    return;
     }
     date_default_timezone_set('Europe/Paris');
-    $dbhost = 'localhost';
-    $dbuser = 'root';
-    $dbpass = 'mypassword';
-    $dbname = 'nf92a172';
+
     $dbtable = 'themes';
+    
     $name = $_POST['name'];
     $descriptif = $_POST['descriptif'];
     $date = date("Y-m-d");
 
     show_summary($_POST);
 
-    $connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname) or die("Can't connect to database");
+    $connect = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME) or die("Can't connect to database");
+    mysqli_query($connect, "SET NAMES utf8");
+
     $query = "INSERT INTO ".$dbtable." (nom, descriptif) VALUES ('".$name."','".$descriptif."')";
     echo "<h1>Query</h1>".$query."<br>";
+
     $result = mysqli_query($connect, $query);
     if (!$result) {
         echo "Bad request<br>".mysqli_error($connect);
