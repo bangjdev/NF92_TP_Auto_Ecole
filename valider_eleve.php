@@ -19,10 +19,6 @@ function check_params($params) {
     return true;
 }
 
-function show_summary($params) {
-    
-}
-
 // ==================== MAIN ====================
 if (!check_params($_POST)) {
     echo "Bad request<br>";
@@ -46,20 +42,48 @@ mysqli_query($connect, "SET NAMES utf8");
 
 $query = "SELECT * FROM ".$dbtable." WHERE nom='".$lastname."' AND prenom='".$firstname."'";
 $result = mysqli_query($connect, $query);
-if (mysqli_num_rows($result)) {
-    echo "Il existe déjà un élève avec le même nom et prénom.<br>
-    Si vous voulez encore l'enregistrer, cliquez sur le bouton <b>Confirmer</b><br>
-    Sinon, cliquez sur le bouton <b>Annuler</b><br>";
-}
 
+
+echo "<div class='container col-sm-6 mx-auto'>";
+if (mysqli_num_rows($result)) {
+    echo "<div class='alert alert-warning' role='alert'>
+              <strong>Atention !</strong> Il existe déjà un élève avec le même nom et prénom.<br>
+              Si vous voulez encore l'enregistrer, cliquez sur le bouton <b>Confirmer</b><br>
+              Sinon, cliquez sur le bouton <b>Annuler</b><br>
+          </div>";
+}
 echo "<h1>Récapitulatif</h1>";
-    echo "<form action='ajouter_eleve.php' method='POST'>
-        <input type='text' name='lastname' value='".$lastname."' readonly='readonly'><br>
-        <input type='text' name='firstname' value='".$firstname."' readonly='readonly'><br>
-        <input type='date' name='dob' value='".$dateNaiss."' readonly='readonly'><br>
-        <input type='submit' class='btn btn-primary' value='Confirmer'>
-        <input type='button' class='btn btn-danger' href='/autoecole.html' value='Annuler'><br>
+echo "<form action='ajouter_eleve.php' method='POST'>
+        <div class='form-group row'>
+           <label class='col-sm-3 col-form-label'>Nom d'élève</label>
+           <div class='col-sm-9'>
+              <input type='text' name='lastname' value='".$lastname."' readonly='readonly' class='form-control'>
+           </div>
+        </div>
+        <div class='form-group row'>
+           <label class='col-sm-3 col-form-label'>Prénom d'élève</label>
+           <div class='col-sm-9'>
+              <input type='text' name='firstname' value='".$firstname."' readonly='readonly' class='form-control'>
+           </div>
+        </div>
+        <div class='form-group row'>
+           <label class='col-sm-3 col-form-label'>Date de naissance</label>
+           <div class='col-sm-9'>
+              <input type='date' name='dob' value='".$dateNaiss."' readonly='readonly' class='form-control'>
+           </div>
+        </div>
+        <div class='form-group'>
+           <div class='col-sm-4 offset-sm-4 btn-group btn-group-justified'>
+              <input type='submit' class='btn btn-primary' value='Confirmer'>
+              <a class='btn btn-danger' href='ajout_eleve.html'>Annuler</a>
+           </div>
+        </div>
      </form>";
+
+echo "</div>";
+
+
+
 
 mysqli_close($connect);
 ?>

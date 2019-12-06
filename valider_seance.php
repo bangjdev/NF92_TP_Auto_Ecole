@@ -14,7 +14,11 @@
     date_default_timezone_set('Europe/Paris');
 
     // Connect to db
+    if (empty($_GET['idseance'])) {
+        return;
+    }
     $idseance = $_GET['idseance'];
+
 
     $connect = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME) or die("Can't connect to database");
     mysqli_query($connect, "SET NAMES utf8");
@@ -25,31 +29,40 @@
                 WHERE eleves.ideleve=inscription.ideleve
                 AND  seances.idseance=inscription.idseances
                 AND  seances.idseance='$idseance'";
-	echo $query;
 	$result = mysqli_query($connect, $query);
-    
+   
+    echo "<div class='container'>";
     echo "<h1>Liste des étudiants à valider</h1>";
     echo "<form action='noter_eleves.php' method = 'POST'>";
-	echo "<table border='1'>";
-	echo "<tr>
+    echo "<div class='table-responsive'>";
+	echo "<table class='table'>";
+	echo "<thead class='thead-dark'>
+          <tr>
 			<th>ID</th>
 			<th>Nom</th>
 			<th>Prénom</th>
 			<th>Date de naissance</th>
 			<th>Nombre de fautes</th>
-		  </tr>";
+		  </tr>
+          </thead>";
     while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) { 
         echo "<tr>";
         for ($i = 0; $i < count($row) - 1; $i ++) {            
 	    	echo "<td>".$row[$i]."</td>";
         }
-		echo "<td><input type='number' name='$row[0]' value='$row[4]'></td>";
+		echo "<td><input type='number' name='$row[0]' value='$row[4]' class='form-control'></td>";
         echo "</tr>";
     }
     echo "</table>";
+    echo "</div>";
     echo "<input type='hidden' name='idseance' value='$idseance'>";
-    echo "<input type='submit' value='Mettre à jour'>";
+    echo "<div class='form-group'>
+              <div class='col-sm-4 offset-sm-4 btn-group btn-group-justified'>
+                  <input class='btn btn-block btn-primary' type='submit' value='Mettre à jour'>
+              </div>
+          </div";
     echo "</form>";
+    echo "</div>";
 
     mysqli_close($connect);
 ?>

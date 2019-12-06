@@ -22,7 +22,8 @@
     $query = "SELECT * FROM ".$eleve_table;
     $eleves = mysqli_query($connect, $query);
 
-    $query = "SELECT * FROM ".$seance_table;
+    $query = "SELECT * FROM $seance_table
+                WHERE DateSeance>CURDATE()";
     $seances = mysqli_query($connect, $query);
 
     echo "<form method='POST' action='inscrire_eleve.php'>";

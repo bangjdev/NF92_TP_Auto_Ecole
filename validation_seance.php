@@ -1,8 +1,5 @@
 <?php
     include('config.php');
-    ini_set('display_startup_errors', 1);
-    ini_set('display_errors', 1);
-    error_reporting(-1);
 
     date_default_timezone_set('Europe/Paris');
 
@@ -25,20 +22,35 @@
                 WHERE seances.DateSeance < '".$today."'";
 
     $result = mysqli_query($connect, $query);
-    
+
+    echo "<div class='container col-sm-8'>";
     echo "<h1>Liste des séances à valider</h1>";
     echo "<form action='valider_seance.php' method = 'POST'>";
-    echo "<table border='1'>";
+    echo "<div class='table-responsive'>";
+    echo "<table class='table'>";
+    echo "<thead class='thead-dark'>
+          <tr>
+            <th>ID Séance</th>
+            <th>Thème</th>
+            <th>Description</th>
+            <th>Date de séance</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>";
     while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) { 
         echo "<tr>";
         for ($i = 0; $i < count($row); $i ++) {            
 	    	echo "<td>".$row[$i]."</td>";
         }
-		echo "<td><a href='valider_seance.php?idseance=".$row[0]."'>Noter</a></td>";
+		echo "<td><a class='btn btn-success' href='valider_seance.php?idseance=".$row[0]."'>Noter</a></td>";
         echo "</tr>";
     }
+    echo "</tbody>";
     echo "</table>";
+    echo "</div>";
     echo "</form>";
+    echo "</div>";
 
     mysqli_close($connect);
 ?>

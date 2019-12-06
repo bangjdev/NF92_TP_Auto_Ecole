@@ -1,9 +1,23 @@
 <?php
     include('config.php');
+    $required_params = array('ideleve',
+                        'idseances');
 
-    ini_set('display_startup_errors', 1);
-    ini_set('display_errors', 1);
-    error_reporting(-1);
+// ==================== FUNCTIONS ====================
+
+function check_params($params) {
+    foreach ($GLOBALS['required_params'] as $param_name) {
+        if (empty($params[$param_name]))
+            return false;
+    }
+    return true;
+}
+
+// ==================== MAIN ====================
+    if (!check_params($_POST)) {
+        echo "Bad request<br>";
+        return;
+    }
 
     // Connect to db
     $ins_table = 'inscription';

@@ -1,8 +1,6 @@
 <?php
     include('config.php');
 // ================ GLOBAL VARIABLES =================
-//    error_reporting(E_ALL);
-//    ini_set('display_errors', 1); 
     $required_params = array('name',
                             'descriptif');
 
@@ -42,6 +40,22 @@ function show_summary($params) {
     $connect = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME) or die("Can't connect to database");
     mysqli_query($connect, "SET NAMES utf8");
 
+    // Verify if there was a theme with same name
+
+    $query = "SELECT * FROM ".$dbtable." WHERE nom='$name'";
+    $result = mysqli_query($connect, $query);
+    if ($result) {
+        $row = mysqli_fetch_array($result);
+        if ($row[2]=='1') {  // it's deleted, reactivate it
+            mysqli_query($connect, "UPDATE $dbtable SET supprime='0' WHERE idtheme=$row[0]"); 
+        }
+        // Duplicated, exit
+        mysqli_close($connect);
+        return;        
+    }
+    
+    // If not, insert a new theme
+
     $query = "INSERT INTO ".$dbtable." (nom, descriptif) VALUES ('".$name."','".$descriptif."')";
     echo "<h1>Query</h1>".$query."<br>";
 
@@ -49,5 +63,6 @@ function show_summary($params) {
     if (!$result) {
         echo "Bad request<br>".mysqli_error($connect);
     }
+
     mysqli_close($connect);
 ?>
