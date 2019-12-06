@@ -8,6 +8,7 @@
     echo "<head>
         <meta charset='utf-8'/>
         <link rel='stylesheet' type='text/css' href='bootstrap-4.3.1/css/bootstrap.min.css'>
+        <link rel='stylesheet' type='text/css' href='css/container.css'>
     </head>";
 
 
@@ -31,23 +32,26 @@
                 AND  seances.idseance='$idseance'";
 	$result = mysqli_query($connect, $query);
    
-    echo "<div class='container'>";
+    echo "<div class='container col-sm-8 mainbox-big'>";
     echo "<h1>Liste des étudiants à valider</h1>";
     echo "<form action='noter_eleves.php' method = 'POST'>";
     echo "<div class='table-responsive'>";
 	echo "<table class='table'>";
 	echo "<thead class='thead-dark'>
           <tr>
-			<th>ID</th>
+			<th>Index</th>
 			<th>Nom</th>
 			<th>Prénom</th>
 			<th>Date de naissance</th>
 			<th>Nombre de fautes</th>
 		  </tr>
           </thead>";
+    $count = 0;
     while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) { 
+        $count ++;        
         echo "<tr>";
-        for ($i = 0; $i < count($row) - 1; $i ++) {            
+        echo "<td>$count</td>";
+        for ($i = 1; $i < count($row) - 1; $i ++) {            
 	    	echo "<td>".$row[$i]."</td>";
         }
 		echo "<td><input type='number' name='$row[0]' value='$row[4]' class='form-control'></td>";
@@ -60,7 +64,7 @@
               <div class='col-sm-4 offset-sm-4 btn-group btn-group-justified'>
                   <input class='btn btn-block btn-primary' type='submit' value='Mettre à jour'>
               </div>
-          </div";
+          </div>";
     echo "</form>";
     echo "</div>";
 
