@@ -31,11 +31,11 @@
     echo "<table class='table'>";
     echo "<thead class='thead-dark'>
           <tr>
-            <th>Index</th>
-            <th>Thème</th>
-            <th>Description</th>
-            <th>Date de séance</th>
-            <th>#</th>
+            <th class='col-sm-1'>Index</th>
+            <th class='col-sm-3'>Thème</th>
+            <th class='col-sm-3'>Description</th>
+            <th class='col-sm-3'>Date de séance</th>
+            <th class='col-sm-2'>#</th>
           </tr>
           </thead>
           <tbody>";
@@ -43,11 +43,11 @@
     while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) { 
         $count ++;        
         echo "<tr>";
-        echo "<td>$count</td>";
+        echo "<td class='col-sm-1'>$count</td>";
         for ($i = 1; $i < count($row); $i ++) {            
-	    	echo "<td>".$row[$i]."</td>";
+	    	echo "<td class='col-sm-3'>".$row[$i]."</td>";
         }
-		echo "<td><a class='btn btn-success' href='valider_seance.php?idseance=".$row[0]."'>Noter</a></td>";
+		echo "<td class='col-sm-2'><a class='btn btn-success' href='valider_seance.php?idseance=".$row[0]."'>Noter</a></td>";
         echo "</tr>";
     }
     echo "</tbody>";
@@ -57,4 +57,3 @@
     echo "</div>";
 
     mysqli_close($connect);
-?>

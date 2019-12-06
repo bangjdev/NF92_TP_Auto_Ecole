@@ -20,19 +20,20 @@
 
 
     $query = "SELECT ideleve, nom, prenom FROM eleves";
-	$result = mysqli_query($connect, $query);
-   
+    $result = mysqli_query($connect, $query);
+    
+    $count = mysqli_num_rows($result);
     echo "<div class='col-sm-8 container mainbox-big'>";
-    echo "<h1>Liste des étudiants</h1>";
+    echo "<h1>Nombre des élèves: $count</h1>";
     echo "<form action='consulter_eleve.php' method = 'POST'>";
     echo "<div class='table-responsive'>";
 	echo "<table class='table'>";
 	echo "<thead class='thead-dark'>
           <tr>
-            <th>Index</th>
-			<th>Nom</th>
-            <th>Prénom</th>
-            <th>#</th>
+            <th class='col-sm-2'>Index</th>
+			<th class='col-sm-3'>Nom</th>
+            <th class='col-sm-3'>Prénom</th>
+            <th class='col-sm-4'>#</th>
 		  </tr>
           </thead>";
     echo "<tbody>";
@@ -40,11 +41,11 @@
     while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) { 
         $count ++;
         echo "<tr>";
-        echo "<td>$count</td>";
+        echo "<td class='col-sm-2'>$count</td>";
         for ($i = 1; $i < count($row); $i ++) {            
-	    	echo "<td>".$row[$i]."</td>";
+	    	echo "<td class='col-sm-3'>".$row[$i]."</td>";
         }		
-        echo "<td><a class='btn btn-success' href='consulter_eleve.php?ideleve=".$row[0]."'>Consulter</a></td>";
+        echo "<td class='col-sm-4'><a class='btn btn-success' href='consulter_eleve.php?ideleve=".$row[0]."'>Consulter</a></td>";
         echo "</tr>";
     }
     echo "</tbody>";
@@ -54,4 +55,3 @@
     echo "</div>";
 
     mysqli_close($connect);
-?>

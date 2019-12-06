@@ -32,29 +32,31 @@
                 AND  seances.idseance='$idseance'";
 	$result = mysqli_query($connect, $query);
    
-    echo "<div class='container col-sm-8 mainbox-big'>";
+    echo "<div class='container col-sm-11 mainbox-big'>";
     echo "<h1>Liste des étudiants à valider</h1>";
     echo "<form action='noter_eleves.php' method = 'POST'>";
     echo "<div class='table-responsive'>";
 	echo "<table class='table'>";
 	echo "<thead class='thead-dark'>
           <tr>
-			<th>Index</th>
-			<th>Nom</th>
-			<th>Prénom</th>
-			<th>Date de naissance</th>
-			<th>Nombre de fautes</th>
+			<th class='col-sm-1'>Index</th>
+			<th class='col-sm-3'>Nom</th>
+			<th class='col-sm-3'>Prénom</th>
+			<th class='col-sm-3'>Date de naissance</th>
+			<th class='col-sm-2'>Nombre de fautes</th>
 		  </tr>
           </thead>";
     $count = 0;
     while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) { 
         $count ++;        
         echo "<tr>";
-        echo "<td>$count</td>";
+        echo "<td class='col-sm-1'>$count</td>";
         for ($i = 1; $i < count($row) - 1; $i ++) {            
-	    	echo "<td>".$row[$i]."</td>";
+	    	echo "<td class='col-sm-3'>".$row[$i]."</td>";
         }
-		echo "<td><input type='number' name='$row[0]' value='$row[4]' class='form-control'></td>";
+        echo "<td class='col-sm-2'>
+                <input type='number' name='$row[0]' value='$row[4]' class='form-control'>
+              </td>";
         echo "</tr>";
     }
     echo "</table>";

@@ -27,6 +27,15 @@ function check_params($params) {
 
     $connect = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME) or die("Can't connect to database");
     mysqli_query($connect, "SET NAMES utf8");
+
+    $EffMax = mysqli_fetch_row(mysqli_query($connect, "SELECT EffMax FROM seances WHERE idseance=$seances"))[0];
+    $currentEff = mysqli_fetch_row(mysqli_query($connect, "SELECT count(*) FROM inscription WHERE idseances=$seances"))[0];
+    echo $EffMax." ".$currentEff;
+    if ($currentEff >= $EffMax) {
+        echo "Pas assez de places";
+        mysqli_close($connect);
+        return;
+    }
     
     $query = "INSERT INTO ".$ins_table." VALUES('".$eleve."', '".$seances."', '')";
     echo $query;
@@ -36,6 +45,5 @@ function check_params($params) {
     if (!$result) {
         echo "Bad request<br>".mysqli_error($connect);
     }
-
-    mysqli_close($connect);
+    
 ?>

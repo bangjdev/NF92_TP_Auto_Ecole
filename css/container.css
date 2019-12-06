@@ -1,36 +1,40 @@
 .mainbox-big {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin-top: 2%;
-    margin-bottom: 10px;
-    padding: 30px;
-    height: 90%;
-    overflow: auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 30px;
+  max-height: 95%;
 }
 
-table {
-    vertical-align: middle;
+.table tbody {
+  max-height: 400px;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.table thead, .table tbody, .table tr, .table td, .table th {
+  display: block;
+}
+
+.table tbody td, .table thead>tr>th {
+  float: left;
+  border-bottom-width: 0;
 }
 
 table tbody tr td:last-child {
-    text-align: center;
-}
-
-table tbody tr td:first-child {
-    text-align: center;
+  text-align: center;
 }
 
 table thead tr th:last-child {
-    text-align: center;
-}
-
-table thead tr th:first-child {
-    text-align: center;
+  text-align: center;
 }
 
 table tbody tr td {
-    width: auto;
+  width: 100%;
+  vertical-align: middle!important;
 }
 
 table thead tr th {
-    width: auto;
+  width: 100%;
+  vertical-align: middle!important;
 }

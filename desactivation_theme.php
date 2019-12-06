@@ -7,7 +7,7 @@
 
     echo "<head>
         <meta charset='utf-8'/>
-        <link rel='stylesheet' type='text/css' href='bootstrap-4.4.1-dist/css/bootstrap.min.css'>
+        <link rel='stylesheet' type='text/css' href='bootstrap-4.3.1/css/bootstrap.min.css'>
         <link rel='stylesheet' type='text/css' href='css/container.css'>
     </head>";
 
@@ -31,10 +31,10 @@
 	echo "<table class='table'>";
 	echo "<thead class='thead-dark'>
           <tr>
-            <th>Index</th>
-			<th>Nom</th>
-            <th>Description</th>
-            <th>#</th>
+            <th class='col-sm-2'>Index</th>
+			<th class='col-sm-3'>Nom</th>
+            <th class='col-sm-3'>Description</th>
+            <th class='col-sm-4'>#</th>
 		  </tr>
           </thead>";
     echo "<tbody>";
@@ -42,22 +42,22 @@
     while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) { 
         $count ++;
         echo "<tr>";
-        echo "<td>$count</td>";
+        echo "<td class='col-sm-2'>$count</td>";
         for ($i = 1; $i < count($row); $i ++) {            
-	    	echo "<td>".$row[$i]."</td>";
+	    	echo "<td class='col-sm-3'>".$row[$i]."</td>";
         }		
-        echo "<td><input type='checkbox' id='coding' name='idthemes[]' value='$row[0]'></td>";
+        echo "<td class='col-sm-4'><input class='form-control' type='checkbox' id='coding' name='idthemes[]' value='$row[0]'></td>";
         echo "</tr>";
     }
     echo "</tbody>";
     echo "</table>";
     echo "</div>";
     echo "<div class='form-group'>
-            <div class='col-sm-4 offset-sm-4 btn-group btn-group-justified'>
-                <input class='btn btn-danger' type='submit' value='Désactiver'>
-                <input class='btn btn-warning' type='reset' value='Effacer'>
-            </div>
-          </div>";
+            <div class='btn-group d-flex col-sm-6 offset-sm-3' role='group'>
+                <input class='btn btn-danger w-100' type='submit' value='Désactiver'>
+                <input class='btn btn-warning w-100' type='reset' value='Effacer'>
+            </div>            
+        </div>";
     echo "</form>";
     echo "</div>";
 
