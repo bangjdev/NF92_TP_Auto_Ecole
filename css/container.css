@@ -1,0 +1,36 @@
+.mainbox-big {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-top: 2%;
+    margin-bottom: 10px;
+    padding: 30px;
+    height: 90%;
+    overflow: auto;
+}
+
+table {
+    vertical-align: middle;
+}
+
+table tbody tr td:last-child {
+    text-align: center;
+}
+
+table tbody tr td:first-child {
+    text-align: center;
+}
+
+table thead tr th:last-child {
+    text-align: center;
+}
+
+table thead tr th:first-child {
+    text-align: center;
+}
+
+table tbody tr td {
+    width: auto;
+}
+
+table thead tr th {
+    width: auto;
+}
