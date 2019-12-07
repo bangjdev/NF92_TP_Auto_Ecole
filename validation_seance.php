@@ -24,7 +24,7 @@
 
     $result = mysqli_query($connect, $query);
 
-    echo "<div class='container col-sm-8 mainbox-big'>";
+    echo "<div class='container col-sm-10 mainbox-big'>";
     echo "<h1>Liste des séances à valider</h1>";
     echo "<form action='valider_seance.php' method = 'POST'>";
     echo "<div class='table-responsive'>";

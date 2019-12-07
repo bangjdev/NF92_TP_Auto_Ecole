@@ -24,7 +24,7 @@
               WHERE supprime=0";
 	$result = mysqli_query($connect, $query);
    
-    echo "<div class='col-sm-8 container mainbox-big'>";
+    echo "<div class='col-sm-10 container mainbox-big'>";
     echo "<h1>Liste des thèmes disponibles</h1>";
     echo "<form action='desactiver_theme.php' method = 'POST'>";
     echo "<div class='table-responsive'>";

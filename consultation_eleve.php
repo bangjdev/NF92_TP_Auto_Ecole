@@ -23,7 +23,7 @@
     $result = mysqli_query($connect, $query);
     
     $count = mysqli_num_rows($result);
-    echo "<div class='col-sm-8 container mainbox-big'>";
+    echo "<div class='col-sm-10 container mainbox-big'>";
     echo "<h1>Nombre des élèves: $count</h1>";
     echo "<form action='consulter_eleve.php' method = 'POST'>";
     echo "<div class='table-responsive'>";

@@ -45,7 +45,7 @@
           </div>";
 
     echo "<div class='form-group row'>
-            <label class='col-sm-4 col-form-label'>Choissisez un élève</label>
+            <label class='col-sm-4 col-form-label'>Choissisez une séance</label>
             <div class='col-sm-8'>
                 <select class='custom-select' name='idseances' size='5'>";
     while ($row = mysqli_fetch_array($seances, MYSQLI_NUM)) {
