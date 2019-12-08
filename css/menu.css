@@ -44,9 +44,17 @@ a[data-toggle="collapse"] {
     position: relative;
 }
 
-#sidebar ul li.active > a, a[aria-expanded="true"] {
-    color: rgb(0, 0, 0);
+#sidebar ul li.active {    
     background: rgb(40, 167, 78);
+}
+
+#sidebar ul li.active > a{    
+    color: black;
+}
+
+#sidebar ul li > a[aria-expanded="true"] {
+    text-decoration: underline;
+    font-weight: bold;
 }
 
 .dropdown-toggle::after {

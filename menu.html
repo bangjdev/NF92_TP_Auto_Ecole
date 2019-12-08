@@ -15,27 +15,27 @@
                     <h3>Auto école</h3>
                 </div>
                 <ul class="list-unstyled components">
-                    <li><a href="acceuil.html" target="content">Accueil</a></li>
+                    <li class="active"><a class="menuItem" href="acceuil.html" target="content">Accueil</a></li>
                     <li>
                         <a href="#eleveSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Élèves</a>
                         <ul class="collapse list-unstyled" id="eleveSubmenu">
                             <li>
-                                <a href="ajout_eleve.html" target="content">Ajouter</a>
+                                <a class="menuItem" href="ajout_eleve.html" target="content">Ajouter</a>
                             </li>
                             <li>
-                                <a href="consultation_eleve.php" target="content">Consulter</a>
+                                <a class="menuItem" href="consultation_eleve.php" target="content">Consulter</a>
                             </li>
                             <li>
-                                <a href="inscription_eleve.php" target="content">Inscrire</a>
+                                <a class="menuItem" href="inscription_eleve.php" target="content">Inscrire</a>
                             </li>
                             <li>
-                                <a href="choix_eleve.php" target="content">Désincrire</a>
+                                <a class="menuItem" href="choix_eleve.php" target="content">Désincrire</a>
                             </li>
                             <li>
-                                <a href="visualisation_calendrier_eleve.php" target="content">Visualiser calendrier</a>
+                                <a class="menuItem" href="visualisation_calendrier_eleve.php" target="content">Visualiser calendrier</a>
                             </li>
                             <li>
-                                <a href="statistique_eleve.php" target="content">Statistique</a>
+                                <a class="menuItem" href="statistique_eleve.php" target="content">Statistique</a>
                             </li>
                         </ul>
                     </li>
@@ -43,10 +43,10 @@
                         <a href="#themeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Thèmes</a>
                         <ul class="level_1 collapse list-unstyled" id="themeSubmenu">
                             <li>
-                                <a href="ajout_theme.html" target="content">Ajouter</a>
+                                <a class="menuItem" href="ajout_theme.html" target="content">Ajouter</a>
                             </li>
                             <li>
-                                <a href="desactivation_theme.php" target="content">Desactiver</a>
+                                <a class="menuItem" href="desactivation_theme.php" target="content">Desactiver</a>
                             </li>
                         </ul>
                     </li>
@@ -54,18 +54,29 @@
                         <a href="#seanceSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Séances</a>
                         <ul class="level_1 collapse list-unstyled" id="seanceSubmenu">
                             <li>
-                                <a href="ajout_seance.php" target="content">Ajouter</a>
+                                <a class="menuItem" href="ajout_seance.php" target="content">Ajouter</a>
                             </li>
                             <li>
-                                <a href="suppression_seance.php" target="content">Supprimer</a>
+                                <a class="menuItem" href="suppression_seance.php" target="content">Supprimer</a>
                             </li>
                             <li>
-                                <a href="validation_seance.php" target="content">Valider</a>
+                                <a class="menuItem" href="validation_seance.php" target="content">Valider</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
             </nav>
         </div>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(".menuItem").click(function() {
+                    var menuItems = $(".menuItem");
+                    for (var i = 0; i < menuItems.length; i ++) {
+                        $(menuItems[i]).parent().removeClass("active");
+                    }
+                    $(this).parent().addClass("active");
+                });
+            });
+        </script>
     </body>
 </html>
