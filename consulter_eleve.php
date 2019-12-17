@@ -1,56 +1,42 @@
 <?php
-    include('config.php');
-
-    ini_set('display_startup_errors', 1);
-    ini_set('display_errors', 1);
-    error_reporting(-1);
-
-    echo "<head>
-        <meta charset='utf-8'/>
-        <link rel='stylesheet' type='text/css' href='bootstrap-4.3.1/css/bootstrap.min.css'>
-    </head>";
+include('config.php');
 
 
-    date_default_timezone_set('Europe/Paris');
-
-    // Connect to db
-    if (empty($_GET['ideleve'])) {
-        return;
-    }
-    $ideleve = $_GET['ideleve'];
+echo "<head>
+    <meta charset='utf-8'/>
+    <link rel='stylesheet' type='text/css' href='bootstrap-4.3.1/css/bootstrap.min.css'>
+    <link rel='stylesheet' type='text/css' href='css/container.css'>
+</head>";
 
 
-    $connect = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME) or die("Can't connect to database");
-    mysqli_query($connect, "SET NAMES utf8");
+date_default_timezone_set('Europe/Paris');
+
+// Connect to db
+if (empty($_GET['ideleve'])) {
+    return;
+}
+$ideleve = $_GET['ideleve'];
 
 
-    $query = "SELECT nom, prenom, dateNaiss, dateInscription
-                FROM eleves
-                WHERE ideleve=$ideleve";
-	$result = mysqli_query($connect, $query);
-   
-    echo "<div class='container'>";
-    echo "<h1>Informations personnelles</h1>";    
-    echo "<div class='table-responsive'>";
-	echo "<table class='table'>";
-	echo "<thead class='thead-dark'>
-          <tr>
-			<th>Nom</th>
-			<th>Prénom</th>
-            <th>Date de naissance</th>
-            <th>Date d'inscription</th>
-		  </tr>
-          </thead>";
-    while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) { 
-        echo "<tr>";
-        for ($i = 0; $i < count($row); $i ++) {
-	    	echo "<td>".$row[$i]."</td>";
-        }
-        echo "</tr>";
-    }
-    echo "</table>";
-    echo "</div>";
-    echo "</div>";
+$connect = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME) or die("Can't connect to database");
+mysqli_query($connect, "SET NAMES utf8");
 
-    mysqli_close($connect);
+
+$query = "SELECT nom, prenom, dateNaiss, dateInscription
+            FROM eleves
+            WHERE ideleve=$ideleve";
+$result = mysqli_query($connect, $query);
+$row = mysqli_fetch_array($result, MYSQLI_NUM);
+
+echo "<div class='container col-sm-6 mainbox-big'>";
+echo "<h2>Information</h2>    
+        <ul>
+            <li>Nom:                ".$row[0]."</li>
+            <li>Prénom:             ".$row[1]."</li>
+            <li>Date de naissance:  ".$row[2]."</li>
+            <li>Date d'inscription: ".$row[3]."</li>
+        </ul>
+    </div>";
+
+mysqli_close($connect);
 ?>
