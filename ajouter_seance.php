@@ -1,11 +1,12 @@
 <?php
-    include('config.php');
+include('config.php');
+include('message.php');
 // ================ GLOBAL VARIABLES =================
-    date_default_timezone_set('Europe/Paris');
+date_default_timezone_set('Europe/Paris');
 
-    $required_params = array('menuChoixTheme',
-                            'DateSeance',
-                            'effmax');
+$required_params = array('menuChoixTheme',
+                        'DateSeance',
+                        'effmax');
 
 // ==================== FUNCTIONS ====================
 
@@ -18,53 +19,73 @@ function check_params($params) {
 }
 
 function show_summary($params) {
-    echo "<h1>Récapitulatif</h1><ul>";
-    foreach ($GLOBALS['required_params'] as $param_name) {
-        echo "<li>".$param_name." : ".$params[$param_name]."</li>";
-    }
+    echo "<h1>Récapitulatif</h1>";
+    echo "<ul>";
+        echo "<li>ID thème : ".$params['menuChoixTheme']."</li>";
+        echo "<li>Date : ".$params['DateSeance']."</li>";
+        echo "<li>Nombre d'effectis maximum : ".$params['effmax']."</li>";
     echo "</ul>";
 }
 
 // ==================== MAIN ====================
-    if (!check_params($_POST)) {
-        //      http_response_code(400);
-        echo "Bad request<br>";
-        return;
-    }
-    $dbtable = 'seances';
-    $theme = $_POST['menuChoixTheme'];
-    $dateseance = $_POST['DateSeance'];
-    $today = date("Y-m-d");
-    $effmax = $_POST['effmax'];
+echo "<head>
+        <meta charset='utf-8'/>
+        <link rel='stylesheet' type='text/css' href='bootstrap-4.3.1/css/bootstrap.min.css'>
+        <link rel='stylesheet' type='text/css' href='css/container.css'>
+    </head>";
+if (!check_params($_POST)) {
+    echo "<div class='container col-sm-6 errorbox'>
+            <div class='alert alert-danger'>
+                <strong>Mauvaise requête !</strong><br>Veuillez remplir tous les champs demandés
+            </div>
+        </div>";
+    return;
+}  
+$dbtable = 'seances';
+$theme = $_POST['menuChoixTheme'];
+$dateseance = $_POST['DateSeance'];
+$today = date("Y-m-d");
+$effmax = $_POST['effmax'];
 
-    show_summary($_POST);
+// show_summary($_POST);
 
-    if ($dateseance < $today) {
-        echo "Vous ne pouvez pas créer une séance au passé<br>";        
-        return;
-    }    
+if ($dateseance < $today) {
+    echo "<div class='container col-sm-6 errorbox'>
+            <div class='alert alert-danger'>
+                Vous ne pouvez pas créer une séance au passé
+            </div>
+        </div>";
+    return;
+}    
 
-    $connect = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME) or die("Can't connect to database");
-    mysqli_query($connect, "SET NAMES utf8");
+$connect = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME) or die("Can't connect to database");
+mysqli_query($connect, "SET NAMES utf8");
 
-    // Check duplicate seance
-    $query = "SELECT * FROM ".$dbtable." WHERE DateSeance='".$dateseance."' and idtheme='".$theme."'";
-    $result = mysqli_query($connect, $query);
-    if (mysqli_num_rows($result)) {
-        echo "Vous ne pouvez pas avoir des séances avec le même thème et la même date";
-        mysqli_close($connect);
-        return;
-    }
-
-    // Insert seance
-
-    $query = "INSERT INTO ".$dbtable." VALUES(NULL,'".$dateseance."','".$effmax."','".$theme."')";
-
-    echo "<h1>Query</h1>".$query."<br>";
-    $result = mysqli_query($connect, $query);
-    if (!$result) {
-        echo "Bad request<br>".mysqli_error($connect);
-    }
+// Check duplicate seance
+$query = "SELECT * FROM ".$dbtable." WHERE DateSeance='".$dateseance."' and idtheme='".$theme."'";
+$result = mysqli_query($connect, $query);
+if (mysqli_num_rows($result)) {
+    echo "<div class='container col-sm-6 errorbox'>
+            <div class='alert alert-danger'>
+                Vous ne pouvez pas avoir des séances avec le même thème et la même date
+            </div>
+        </div>";
     mysqli_close($connect);
+    return;
+}
+
+// Insert seance
+$query = "INSERT INTO ".$dbtable." VALUES(NULL,'".$dateseance."','".$effmax."','".$theme."')";
+
+$result = mysqli_query($connect, $query);
+if (!$result) {
+    show_error("Impossible d'enregistrer dans la base de données");
+} else {
+    echo "<div class='container col-sm-6 mainbox-big'>";
+    show_success("Créé une nouvelle séance");
+    show_summary($_POST);
+    echo "</div>";
+}
+mysqli_close($connect);
 ?>
 

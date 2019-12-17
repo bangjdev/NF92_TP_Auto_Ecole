@@ -44,8 +44,9 @@ function check_params($params) {
                 AND   seances.idtheme=themes.idtheme
                 AND   seances.DateSeance > CURDATE()";
 
-    echo $query;
     $seances = mysqli_query($connect, $query);
+
+    $count_seances = 0;
 
     echo "<div class='container col-sm-10 mainbox-big'>";
     echo "<h1>Choissisez une séance pour désinscrire</h1>";
@@ -63,6 +64,7 @@ function check_params($params) {
           </thead>";
     echo "<tbody>";
     while ($row = mysqli_fetch_array($seances, MYSQLI_NUM)) {
+        $count_seances ++;
         echo "<tr>";
         for ($i = 1; $i < count($row); $i ++) {
             if ($i == count($row) - 1)
@@ -74,16 +76,23 @@ function check_params($params) {
         echo "</tr>";
     }
     echo "</tbody>";
+    echo "<tfoot>
+            <tr>
+                <td>Il y a $count_seances séances</td>
+            </tr>
+        </tfoot>";
     echo "</table>";
     echo "</div>";
-    echo "
-        <div class='form-group'>
-        <div class='btn-group d-flex col-sm-4 offset-sm-4' role='group'>
-            <input type='submit' class='btn btn-primary w-100' value='Désincrire'>
-        </div>            
-      </div>
-    </form>
-    </div>";
+    if ($count_seances != 0) {
+        echo "<div class='form-group'>
+                <div class='btn-group d-flex col-sm-4 offset-sm-4' role='group'>
+                    <input type='submit' class='btn btn-primary w-100' value='Désincrire'>
+                </div>
+            </div>
+        </form>
+        </div>";
+    }
+    
 
     mysqli_close($connect);
 ?>
