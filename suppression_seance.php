@@ -1,10 +1,6 @@
 <?php
     include('config.php');
 
-    ini_set('display_startup_errors', 1);
-    ini_set('display_errors', 1);
-    error_reporting(-1);
-
     echo "<head>
         <meta charset='utf-8'/>
         <link rel='stylesheet' type='text/css' href='bootstrap-4.3.1/css/bootstrap.min.css'>
@@ -20,8 +16,7 @@
                 FROM seances, themes
                 WHERE seances.idtheme=themes.idtheme
                 AND   seances.DateSeance > CURDATE()";
-
-    echo $query;
+    
     $seances = mysqli_query($connect, $query);
 
     echo "<div class='container col-sm-10 mainbox-big'>";
@@ -38,7 +33,9 @@
 		  </tr>
           </thead>";
     echo "<tbody>";
+    $count = 0;
     while ($row = mysqli_fetch_array($seances, MYSQLI_NUM)) {
+        $count ++;
         echo "<tr>";
         for ($i = 1; $i < count($row); $i ++) {
             if ($i == count($row) - 1)
@@ -49,16 +46,22 @@
         echo "<td class='col-sm-1'><input type='radio' name='idseance' value='$row[0]'></td>";
         echo "</tr>";
     }
-    echo "</tbody>";
+    echo "<tfoot>
+            <tr>
+                <td>Il y a $count séances</td>
+            </tr>
+        </tfoot>";
     echo "</table>";
     echo "</div>";
-    echo "
+    if ($count != 0) {
+        echo "
         <div class='form-group'>
         <div class='btn-group d-flex col-sm-4 offset-sm-4' role='group'>
             <input type='submit' class='btn btn-primary w-100' value='Supprimer'>
         </div>            
-      </div>
-    </form>
+      </div>";    
+    }
+    echo "</form>
     </div>";
 
     mysqli_close($connect);

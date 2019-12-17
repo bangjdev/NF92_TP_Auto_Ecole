@@ -49,15 +49,21 @@
         echo "<td class='col-sm-4'><input class='form-control' type='checkbox' id='coding' name='idthemes[]' value='$row[0]'></td>";
         echo "</tr>";
     }
-    echo "</tbody>";
+    echo "<tfoot>
+            <tr>
+                <td>Il y a $count thèmes</td>
+            </tr>
+        </tfoot>";
     echo "</table>";
     echo "</div>";
-    echo "<div class='form-group'>
-            <div class='btn-group d-flex col-sm-6 offset-sm-3' role='group'>
-                <input class='btn btn-danger w-100' type='submit' value='Désactiver'>
-                <input class='btn btn-warning w-100' type='reset' value='Effacer'>
-            </div>            
-        </div>";
+    if ($count != 0) {
+        echo "<div class='form-group'>
+                <div class='btn-group d-flex col-sm-6 offset-sm-3' role='group'>
+                    <input class='btn btn-danger w-100' type='submit' value='Désactiver'>
+                    <input class='btn btn-warning w-100' type='reset' value='Effacer'>
+                </div>            
+            </div>";   
+    }
     echo "</form>";
     echo "</div>";
 

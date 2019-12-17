@@ -50,10 +50,14 @@
 		echo "<td class='col-sm-2'><a class='btn btn-success' href='valider_seance.php?idseance=".$row[0]."'>Noter</a></td>";
         echo "</tr>";
     }
-    echo "</tbody>";
-    echo "</table>";
-    echo "</div>";
-    echo "</form>";
-    echo "</div>";
+    echo "<tfoot>
+            <tr>
+                <td>Il y a $count séances</td>
+            </tr>
+        </tfoot>
+    </table>
+    </div>
+    </form>
+    </div>";    
 
     mysqli_close($connect);

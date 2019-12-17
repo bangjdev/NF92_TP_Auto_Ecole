@@ -88,10 +88,10 @@ function check_params($params) {
                 <div class='btn-group d-flex col-sm-4 offset-sm-4' role='group'>
                     <input type='submit' class='btn btn-primary w-100' value='Désincrire'>
                 </div>
-            </div>
-        </form>
-        </div>";
+            </div>";
     }
+    echo "</form>
+        </div>";
     
 
     mysqli_close($connect);

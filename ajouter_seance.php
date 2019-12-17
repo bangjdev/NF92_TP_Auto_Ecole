@@ -34,11 +34,7 @@ echo "<head>
         <link rel='stylesheet' type='text/css' href='css/container.css'>
     </head>";
 if (!check_params($_POST)) {
-    echo "<div class='container col-sm-6 errorbox'>
-            <div class='alert alert-danger'>
-                <strong>Mauvaise requête !</strong><br>Veuillez remplir tous les champs demandés
-            </div>
-        </div>";
+    show_error("Veuillez remplir tous les champs demandés");
     return;
 }  
 $dbtable = 'seances';
@@ -49,12 +45,8 @@ $effmax = $_POST['effmax'];
 
 // show_summary($_POST);
 
-if ($dateseance < $today) {
-    echo "<div class='container col-sm-6 errorbox'>
-            <div class='alert alert-danger'>
-                Vous ne pouvez pas créer une séance au passé
-            </div>
-        </div>";
+if ($dateseance <= $today) {
+    show_error("Vous ne pouvez que créer une séance dans le futur");    
     return;
 }    
 
@@ -65,11 +57,7 @@ mysqli_query($connect, "SET NAMES utf8");
 $query = "SELECT * FROM ".$dbtable." WHERE DateSeance='".$dateseance."' and idtheme='".$theme."'";
 $result = mysqli_query($connect, $query);
 if (mysqli_num_rows($result)) {
-    echo "<div class='container col-sm-6 errorbox'>
-            <div class='alert alert-danger'>
-                Vous ne pouvez pas avoir des séances avec le même thème et la même date
-            </div>
-        </div>";
+    show_error("Vous ne pouvez pas avoir des séances avec le même thème et la même date");
     mysqli_close($connect);
     return;
 }
