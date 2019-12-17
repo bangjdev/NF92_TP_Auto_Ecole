@@ -24,7 +24,7 @@
     $eleves = mysqli_query($connect, $query);
 
     echo "<div class='container col-sm-6 mainbox-big'>";
-    echo "<h1>Inscription à une séance</h1>";
+    echo "<h1>Désinscription un élève d'une séance</h1>";
     echo "<form method='POST' action='choisir_seance.php'>";
     echo "<div class='form-group row'>
             <label class='col-sm-4 col-form-label'>Choissisez un élève</label>

@@ -8,6 +8,7 @@
     echo "<head>
         <meta charset='utf-8'/>
         <link rel='stylesheet' type='text/css' href='bootstrap-4.3.1/css/bootstrap.min.css'>
+        <link rel='stylesheet' type='text/css' href='css/container.css'>
     </head>";
 
 
@@ -32,22 +33,25 @@
                 AND   seances.DateSeance>CURDATE()";
 	$result = mysqli_query($connect, $query);
    
-    echo "<div class='container'>";
+    echo "<div class='container col-sm-8 mainbox-big'>";
     echo "<h1>Liste des séances du futur</h1>";    
     echo "<div class='table-responsive'>";
 	echo "<table class='table'>";
 	echo "<thead class='thead-dark'>
           <tr>
-			<th>Thème</th>
-			<th>Description</th>
-            <th>Date</th>
+			<th class='col-sm-3'>Thème</th>
+			<th class='col-sm-5'>Description</th>
+            <th class='col-sm-4'>Date</th>
 		  </tr>
           </thead>";
     while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) { 
         echo "<tr>";
-        for ($i = 0; $i < count($row); $i ++) {
-	    	echo "<td>".$row[$i]."</td>";
-        }
+        echo "<td class='col-sm-3'>".$row[0]."</td>";
+        echo "<td class='col-sm-5'>".$row[1]."</td>";
+        echo "<td class='col-sm-4'>".$row[2]."</td>";
+        // for ($i = 0; $i < count($row); $i ++) {
+	    // 	echo "<td class='col-sm-4'>".$row[$i]."</td>";
+        // }
         echo "</tr>";
     }
     echo "</table>";

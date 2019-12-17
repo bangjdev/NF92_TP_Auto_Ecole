@@ -28,7 +28,7 @@
     echo "<form action='consulter_eleve.php' method = 'POST'>";
     echo "<div class='table-responsive'>";
 	echo "<table class='table'>";
-	echo "<thead class='thead-dark table-table-table-responsive'>
+	echo "<thead class='thead-dark'>
           <tr>
 			<th class='col-sm-2'>Nom</th>
             <th class='col-sm-2'>Prénom</th>

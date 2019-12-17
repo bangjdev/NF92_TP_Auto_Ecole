@@ -1,10 +1,6 @@
 <?php
     include('config.php');
-
-    ini_set('display_startup_errors', 1);
-    ini_set('display_errors', 1);
-    error_reporting(-1);
-
+    
     echo "<head>
         <meta charset='utf-8'/>
         <link rel='stylesheet' type='text/css' href='bootstrap-4.3.1/css/bootstrap.min.css'>
@@ -36,7 +32,7 @@
     echo "<div class='form-group row'>
             <label class='col-sm-4 col-form-label'>Choissisez un élève</label>
             <div class='col-sm-8'>
-                <select class='custom-select' name='ideleve' size='5'>";
+                <select class='custom-select' name='ideleve' size='5' required>";
     while ($row = mysqli_fetch_array($eleves, MYSQLI_NUM)) { 
         echo "<option value='".$row[0]."'>".$row[1]." ".$row[2]."</option>";
     }
@@ -47,7 +43,7 @@
     echo "<div class='form-group row'>
             <label class='col-sm-4 col-form-label'>Choissisez une séance</label>
             <div class='col-sm-8'>
-                <select class='custom-select' name='idseances' size='5'>";
+                <select class='custom-select' name='idseances' size='5' required>";
     while ($row = mysqli_fetch_array($seances, MYSQLI_NUM)) {
         echo "<option value='".$row[0]."'>".$row[1]." || ".$row[2]." || ".$row[3]."</option>";
     }
