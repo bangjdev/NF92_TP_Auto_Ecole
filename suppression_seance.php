@@ -43,7 +43,7 @@
             else
 	    	    echo "<td class='col-sm-4'>".$row[$i]."</td>";
         }		
-        echo "<td class='col-sm-1'><input type='radio' name='idseance' value='$row[0]'></td>";
+        echo "<td class='col-sm-1'><input type='radio' name='idseance' value='$row[0]' required></td>";
         echo "</tr>";
     }
     echo "<tfoot>
@@ -54,12 +54,11 @@
     echo "</table>";
     echo "</div>";
     if ($count != 0) {
-        echo "
-        <div class='form-group'>
-        <div class='btn-group d-flex col-sm-4 offset-sm-4' role='group'>
-            <input type='submit' class='btn btn-primary w-100' value='Supprimer'>
-        </div>            
-      </div>";    
+        echo "<div class='form-group'>
+                <div class='btn-group d-flex col-sm-4 offset-sm-4' role='group'>
+                    <input type='submit' class='btn btn-primary w-100' value='Supprimer'>
+                </div>        
+            </div>";
     }
     echo "</form>
     </div>";

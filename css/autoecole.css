@@ -1,0 +1,14 @@
+.bg-image-full {
+    background: url('../assets/pics/utc.jpg') no-repeat center center scroll;
+    background-size: cover;
+    padding-bottom: 3rem;
+    padding-top: 3rem;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+    
+}
