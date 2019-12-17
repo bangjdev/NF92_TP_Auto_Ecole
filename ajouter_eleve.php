@@ -1,5 +1,6 @@
 <?php
 include('config.php');
+include('message.php');
 // ================ GLOBAL VARIABLES =================
 $required_params = array('firstname',
                         'lastname',
@@ -54,16 +55,10 @@ mysqli_query($connect, "SET NAMES utf8");
 $query = "INSERT INTO eleves VALUES(NULL,'".$lastname."','".$firstname."','".$dateNaiss."',CURDATE())";
 $result = mysqli_query($connect, $query);
 if (!$result) {
-    echo "<div class='container col-sm-6 errorbox'>
-            <div class='alert alert-danger'>
-                <strong>Échoué !</strong><br>Impossible d'enregistrer dans la base de données
-            </div>
-        </div>";
+    show_error("Impossible d'enregistrer dans la base de données");
 } else {    
-    echo "<div class='container col-sm-6 mainbox-big'>
-            <div class='alert alert-success'>
-                <strong>Réussi !</strong><br>L'élève a été enregistré
-            </div>";
+    echo "<div class='container col-sm-6 mainbox-big'>";
+    show_success("L'élève a été inscrit");
     show_summary($_POST);
     echo "</div>";
 }
