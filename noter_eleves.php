@@ -22,10 +22,10 @@ if (!check_params($_POST)) {
 
 
 echo "<head>
-    <meta charset='utf-8'/>
-    <link rel='stylesheet' type='text/css' href='bootstrap-4.3.1/css/bootstrap.min.css'>
-    <link rel='stylesheet' type='text/css' href='css/container.css'>
-</head>";
+        <meta charset='utf-8'/>
+        <link rel='stylesheet' type='text/css' href='bootstrap-4.3.1/css/bootstrap.min.css'>
+        <link rel='stylesheet' type='text/css' href='css/container.css'>
+    </head>";
 
 date_default_timezone_set('Europe/Paris');
 

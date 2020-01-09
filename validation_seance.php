@@ -52,7 +52,7 @@
     }
     echo "<tfoot>
             <tr>
-                <td>Il y a $count séances</td>
+                <td>Total : $count séance".(($count>1)?"s":"")."</td>
             </tr>
         </tfoot>
     </table>

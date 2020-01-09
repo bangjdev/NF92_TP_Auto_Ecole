@@ -1,8 +1,8 @@
 .bg-image-full {
     background: url('../assets/pics/utc.jpg') no-repeat center center scroll;
     background-size: cover;
-    padding-bottom: 3rem;
-    padding-top: 3rem;
+    padding-bottom: 4rem;
+    padding-top: 4rem;
 }
 
 .img-fluid {

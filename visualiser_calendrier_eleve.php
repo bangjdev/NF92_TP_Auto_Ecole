@@ -30,8 +30,8 @@
                 WHERE inscription.ideleve=$ideleve
                 AND   inscription.idseances=seances.idseance
                 AND   seances.idtheme=themes.idtheme
-                AND   seances.DateSeance>CURDATE()";
-	$result = mysqli_query($connect, $query);
+                AND   seances.DateSeance>=CURDATE()";
+    $result = mysqli_query($connect, $query);    
    
     echo "<div class='container col-sm-8 mainbox-big'>";
     echo "<h1>Liste des séances du futur</h1>";    
@@ -44,16 +44,21 @@
             <th class='col-sm-4'>Date</th>
 		  </tr>
           </thead>";
-    while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) { 
+    
+    $count = 0; // Count number of séances
+    while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+        $count ++;
         echo "<tr>";
         echo "<td class='col-sm-3'>".$row[0]."</td>";
         echo "<td class='col-sm-5'>".$row[1]."</td>";
-        echo "<td class='col-sm-4'>".$row[2]."</td>";
-        // for ($i = 0; $i < count($row); $i ++) {
-	    // 	echo "<td class='col-sm-4'>".$row[$i]."</td>";
-        // }
+        echo "<td class='col-sm-4'>".$row[2]."</td>";        
         echo "</tr>";
     }
+    echo "<tfoot>
+            <tr>
+                <td>Total : $count séance".(($count>1)?"s":"")."</td>
+            </tr>
+        </tfoot>";
     echo "</table>";
     echo "</div>";
     echo "</div>";

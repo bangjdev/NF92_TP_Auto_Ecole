@@ -32,14 +32,14 @@ $query = "SELECT eleves.ideleve, nom, prenom, dateNaiss, nb_fautes
             AND  seances.idseance='$idseance'";
 $result = mysqli_query($connect, $query);
 
-echo "<div class='container col-sm-11 mainbox-big'>";
-echo "<h1>Liste des étudiants à valider</h1>";
+echo "<div class='container col-sm-10 mainbox-big'>";
+echo "<h1>Liste des élèves à valider</h1>";
 echo "<form action='noter_eleves.php' method = 'POST'>";
 echo "<div class='table-responsive'>";
 echo "<table class='table'>";
 echo "<thead class='thead-dark'>
         <tr>
-        <th class='col-sm-1'>Index</th>
+        <th class='col-sm-1'>ID</th>
         <th class='col-sm-3'>Nom</th>
         <th class='col-sm-3'>Prénom</th>
         <th class='col-sm-3'>Date de naissance</th>
@@ -50,18 +50,18 @@ $count = 0;
 while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) { 
     $count ++;        
     echo "<tr>";
-    echo "<td class='col-sm-1'>$count</td>";
+    echo "<td class='col-sm-1'>".$row[0]."</td>";
     for ($i = 1; $i < count($row) - 1; $i ++) {            
         echo "<td class='col-sm-3'>".$row[$i]."</td>";
     }
     echo "<td class='col-sm-2'>
-            <input type='number' name='$row[0]' value='$row[4]' class='form-control'>
+            <input type='number' name='$row[0]' value='$row[4]' class='form-control' max='40' min='-1'>
             </td>";
     echo "</tr>";
 }
 echo "<tfoot>
         <tr>
-            <td>Il y a $count élèves dans cette séance</td>
+            <td>Total : $count élève".(($count>1)?"s":"")."</td>
         </tr>
     </tfoot>";
 echo "</table>";

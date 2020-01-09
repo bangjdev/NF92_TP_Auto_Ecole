@@ -15,7 +15,7 @@
     $query = "SELECT seances.idseance, themes.nom, themes.descriptif, seances.DateSeance
                 FROM seances, themes
                 WHERE seances.idtheme=themes.idtheme
-                AND   seances.DateSeance > CURDATE()";
+                AND   seances.DateSeance >= CURDATE()";
     
     $seances = mysqli_query($connect, $query);
 
@@ -48,7 +48,7 @@
     }
     echo "<tfoot>
             <tr>
-                <td>Il y a $count séances</td>
+                <td>Total : $count séance".(($count>1)?"s":"")."</td>
             </tr>
         </tfoot>";
     echo "</table>";
