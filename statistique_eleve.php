@@ -28,7 +28,7 @@ function show_statistique_par_theme($connect, $ideleve) {
             <tr>
             <th class='col-sm-3'>Thème</th>
             <th class='col-sm-3'>Description</th>
-            <th class='col-sm-3'>Nombre des séances notées</th>
+            <th class='col-sm-3'>Nb. des séances notées</th>
             <th class='col-sm-3'>Réussite (%)</th>
             </tr>
             </thead>";

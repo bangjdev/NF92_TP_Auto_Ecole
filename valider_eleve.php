@@ -40,15 +40,16 @@ if (!check_params($_POST)) {
 
 $dbtable = 'eleves';
 
-$lastname = $_POST['lastname'];
-$firstname = $_POST['firstname'];
-$dateNaiss = $_POST['dob'];
-$date = date("Y-m-d");
-
 $connect = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME) or die("Can't connect to database");
 mysqli_query($connect, "SET NAMES utf8");
 
+$lastname = mysqli_real_escape_string($connect, $_POST['lastname']);
+$firstname = mysqli_real_escape_string($connect, $_POST['firstname']);
+$dateNaiss = mysqli_real_escape_string($connect, $_POST['dob']);
+$date = date("Y-m-d");
+
 $query = "SELECT * FROM " . $dbtable . " WHERE nom='" . $lastname . "' AND prenom='" . $firstname . "'";
+echo $query;
 $result = mysqli_query($connect, $query);
 
 
@@ -65,13 +66,13 @@ echo "<form action='ajouter_eleve.php' method='POST'>
         <div class='form-group row'>
            <label class='col-sm-3 col-form-label'>Nom d'élève</label>
            <div class='col-sm-9'>
-              <input type='text' name='lastname' value='" . $lastname . "' readonly='readonly' class='form-control'>
+              <input type='text' name='lastname' value='" . htmlspecialchars($_POST['lastname'], ENT_QUOTES) . "' readonly='readonly' class='form-control'>
            </div>
         </div>
         <div class='form-group row'>
            <label class='col-sm-3 col-form-label'>Prénom d'élève</label>
            <div class='col-sm-9'>
-              <input type='text' name='firstname' value='" . $firstname . "' readonly='readonly' class='form-control'>
+              <input type='text' name='firstname' value='" . htmlspecialchars($_POST['firstname'], ENT_QUOTES) . "' readonly='readonly' class='form-control'>
            </div>
         </div>
         <div class='form-group row'>

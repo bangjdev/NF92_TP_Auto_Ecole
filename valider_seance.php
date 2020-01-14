@@ -43,7 +43,7 @@ echo "<thead class='thead-dark'>
         <th class='col-sm-3'>Nom</th>
         <th class='col-sm-3'>Prénom</th>
         <th class='col-sm-3'>Date de naissance</th>
-        <th class='col-sm-2'>Nombre de fautes</th>
+        <th class='col-sm-2'>Nb. de fautes</th>
         </tr>
         </thead>";
 $count = 0;

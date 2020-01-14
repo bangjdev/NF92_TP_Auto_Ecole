@@ -42,9 +42,9 @@ if (!check_params($_POST)) {
 date_default_timezone_set('Europe/Paris');
 
 // Get the POST params
-$lastname = $_POST['lastname'];
-$firstname = $_POST['firstname'];
-$dateNaiss = $_POST['dob'];
+$lastname = mysqli_real_escape_string($connect, $_POST['lastname']);
+$firstname = mysqli_real_escape_string($connect, $_POST['firstname']);
+$dateNaiss = mysqli_real_escape_string($connect, $_POST['dob']);
 
 
 $connect = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME) or die("Can't connect to database");
