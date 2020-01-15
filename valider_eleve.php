@@ -1,5 +1,6 @@
 <?php
 include('config.php');
+include('message.php');
 // ================ GLOBAL VARIABLES =================
 ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
@@ -48,8 +49,12 @@ $firstname = mysqli_real_escape_string($connect, $_POST['firstname']);
 $dateNaiss = mysqli_real_escape_string($connect, $_POST['dob']);
 $date = date("Y-m-d");
 
+if ($dateNaiss >= $date) {
+    show_error("La date de naissance n'est pas bonne");
+    return;
+}
+
 $query = "SELECT * FROM " . $dbtable . " WHERE nom='" . $lastname . "' AND prenom='" . $firstname . "'";
-echo $query;
 $result = mysqli_query($connect, $query);
 
 

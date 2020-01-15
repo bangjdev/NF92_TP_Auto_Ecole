@@ -41,15 +41,16 @@ if (!check_params($_POST)) {
 }
 date_default_timezone_set('Europe/Paris');
 
+
+$connect = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME) or die("Can't connect to database");
+// Set UTF8
+mysqli_query($connect, "SET NAMES utf8");
+
 // Get the POST params
 $lastname = mysqli_real_escape_string($connect, $_POST['lastname']);
 $firstname = mysqli_real_escape_string($connect, $_POST['firstname']);
 $dateNaiss = mysqli_real_escape_string($connect, $_POST['dob']);
 
-
-$connect = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME) or die("Can't connect to database");
-// Set UTF8
-mysqli_query($connect, "SET NAMES utf8");
 
 // INSERT new student
 $query = "INSERT INTO eleves VALUES(NULL,'".$lastname."','".$firstname."','".$dateNaiss."',CURDATE())";

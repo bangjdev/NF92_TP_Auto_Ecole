@@ -46,12 +46,12 @@ date_default_timezone_set('Europe/Paris');
 
 $dbtable = 'themes';
 
-$name = $_POST['name'];
-$descriptif = $_POST['descriptif'];
-$date = date("Y-m-d");
-
 $connect = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME) or die("Can't connect to database");
 mysqli_query($connect, "SET NAMES utf8");
+
+$name = mysqli_real_escape_string($connect, $_POST['name']);
+$descriptif = mysqli_real_escape_string($connect, $_POST['descriptif']);
+$date = date("Y-m-d");
 
 // Verify if there was a theme with same name
 
@@ -64,6 +64,8 @@ if (count($row) > 0) {
         echo "<div class='container col-sm-6 errorbox'>";
         show_success("Réactivé le thème");
         echo "</div>";
+        mysqli_close($connect);
+        return;
     }
     // Duplicated, exit
     show_error("Il existe déjà ce thème");
