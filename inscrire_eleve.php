@@ -53,11 +53,12 @@ if ($currentEff >= $EffMax) {
     return;
 }
 
-$query = "INSERT INTO ".$ins_table." VALUES('".$eleve."', '".$seances."', '')";
+$query = "INSERT INTO ".$ins_table." (ideleve, idseances) VALUES(".$eleve.", ".$seances.")";
+echo $query;
 
 $result = mysqli_query($connect, $query);
 
-if (!$result) {    
+if (!$result) {
     echo "<div class='container col-sm-6 errorbox'>
             <div class='alert alert-danger'>
                 <strong>Échoué !</strong><br>Impossible d'enregistrer dans la base de données";
@@ -67,7 +68,7 @@ if (!$result) {
     }
     echo "</div>
         </div>";
-} else {    
+} else {
     echo "<div class='container col-sm-6 errorbox'>
             <div class='alert alert-success'>
                 <strong>Réussi !</strong><br>L'élève a été inscrit à cette séance

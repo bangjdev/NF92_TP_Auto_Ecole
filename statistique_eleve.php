@@ -12,8 +12,6 @@ function show_statistique_par_theme($connect, $ideleve) {
                 AND   inscription.nb_fautes>=0
                 GROUP BY inscription.idseances";
 
-    // echo $query;
-
     $result = mysqli_query($connect, $query);
     $eleve_info = mysqli_fetch_array(mysqli_query($connect, "SELECT nom, prenom FROM eleves WHERE ideleve=$ideleve"));
     $nom = $eleve_info['nom'];
@@ -118,7 +116,7 @@ date_default_timezone_set('Europe/Paris');
 $connect = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME) or die("Can't connect to database");
 mysqli_query($connect, "SET NAMES utf8");
 
-if ((empty($_POST['ideleve'])) && (empty($_POST['mode']))) {
+if ((empty($_POST['ideleve'])) && (empty($_POST['seance'])) && (empty($_POST['theme']))) {
     // Show eleves to choose
     $query = "SELECT ideleve, nom, prenom, dateNaiss FROM eleves";
     $result = mysqli_query($connect, $query);
@@ -153,8 +151,8 @@ if ((empty($_POST['ideleve'])) && (empty($_POST['mode']))) {
     echo "</div>";
     echo "<div class='form-group'>
             <div class='btn-group d-flex col-sm-4 offset-sm-4' role='group'>
-                <input type='submit' class='btn btn-primary w-100' name = 'mode' value='seance'>
-                <input type='submit' class='btn btn-primary w-100' name = 'mode' value='theme'>
+                <input type='submit' class='btn btn-primary w-100' name = 'seance' value='Par séance'>
+                <input type='submit' class='btn btn-primary w-100' name = 'theme' value='Par thème'>
             </div>        
         </div>";
     echo "</form>";
@@ -162,8 +160,7 @@ if ((empty($_POST['ideleve'])) && (empty($_POST['mode']))) {
 } else {
     // Show statistic
     $ideleve = $_POST['ideleve'];
-    $mode = $_POST['mode'];
-    if ($mode == "theme") {
+    if (!empty($_POST['theme'])) {
         show_statistique_par_theme($connect, $ideleve);
     } else {
         show_statistique_par_seance($connect, $ideleve);
